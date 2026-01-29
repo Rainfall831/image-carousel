@@ -10,19 +10,20 @@ if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir);
 }
 
-const resizeWidth = 250;
+const resizeWidth = 675;
+const resizeHeight = 900;
 
 fs.readdirSync(imagesDir).forEach((file) => {
   if (file.endsWith(".webp")) {
     const inputPath = path.join(imagesDir, file);
     const outputPath = path.join(outputDir, file);
     sharp(inputPath)
-      .resize({ width: resizeWidth })
+      .resize(resizeWidth, resizeHeight, { fit: 'cover' })
       .toFile(outputPath, (err) => {
         if (err) {
           console.error(`Error resizing ${file}:`, err);
         } else {
-          console.log(`Resized ${file} to width ${resizeWidth}`);
+          console.log(`Resized ${file} to 675x900`);
         }
       });
   }
